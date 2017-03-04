@@ -13,6 +13,14 @@ ask = Ask(app, '/')
 def launched():
     return question("Welcome to the Level Project. More features will be coming soon. In the meantime, get political facts by saying: Alexa, ask the level project for a fact... Would you like a demo now?")
 
+@ask.intent('YesOrNoFIrstIntent', mapping={'answer': 'yesorno'})
+def yes_or_no(answer):
+    statement('Okay')
+    if(answer == 'yes'):  
+        return politics_fact()
+    else:
+        return
+
 @ask.intent('GiveRandomInfo')
 def politics_fact():
 
@@ -24,20 +32,20 @@ def politics_fact():
     wiki_api = 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles='
     json_reponse = read_from_url(wiki_api + title)
 
-
-    pages = json_reponse['query']['pages']
-
     introduction = ''
-
+        
     try:
+        pages = json_reponse['query']['pages']
         for key in pages.keys():
-            print key
+            print 'wiki page ref: ' + key
             introduction = pages[key]['extract']
 
     except:
-        print 'error thrown when using title: ' + title
+        print 'Error thrown when using title: ' + title
         politics_fact()
         return
+        
+    statement(title.encode('utf-8'))
 
     return statement(introduction.encode('utf-8'))
 
