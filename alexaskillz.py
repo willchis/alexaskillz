@@ -34,7 +34,9 @@ def politics_fact():
         politics_fact()
         return
 
-    return statement(introduction)
+    print introduction.encode('utf-8')
+
+    return statement(introduction.encode('utf-8'))
 
 def read_from_url(url):
     response = urllib.urlopen(url)
