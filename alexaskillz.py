@@ -27,7 +27,9 @@ def politics_fact():
     #TODO add headers to ensure wiki api allows access
 
     title = get_random_politics_title()
-    title = urllib.quote(title)
+    statement(title.encode('utf-8'))
+
+    title = urllib.quote(title) # encode to include in url
 
     wiki_api = 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles='
     json_reponse = read_from_url(wiki_api + title)
@@ -44,9 +46,7 @@ def politics_fact():
         print 'Error thrown when using title: ' + title
         politics_fact()
         return
-
-    statement(title.encode('utf-8'))
-
+        
     return statement(introduction.encode('utf-8'))
 
 def read_from_url(url):
