@@ -8,6 +8,11 @@ from flask_ask import Ask, statement
 app = Flask(__name__)
 ask = Ask(app, '/')
 
+
+@ask.launch
+def launched():
+    return question("Welcome to the Level Project. More features will be coming soon. In the meantime, get political facts by saying: Alexa, ask the level project for a fact... Would you like a demo now?")
+
 @ask.intent('GiveRandomInfo')
 def politics_fact():
 
@@ -33,8 +38,6 @@ def politics_fact():
         print 'error thrown when using title: ' + title
         politics_fact()
         return
-
-    print introduction.encode('utf-8')
 
     return statement(introduction.encode('utf-8'))
 
