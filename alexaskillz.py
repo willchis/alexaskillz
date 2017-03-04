@@ -3,7 +3,7 @@ import urllib, json
 from random import randint
 
 from flask import Flask
-from flask_ask import Ask, statement
+from flask_ask import Ask, statement, question
 
 app = Flask(__name__)
 ask = Ask(app, '/')
@@ -44,7 +44,7 @@ def politics_fact():
         print 'Error thrown when using title: ' + title
         politics_fact()
         return
-        
+
     statement(title.encode('utf-8'))
 
     return statement(introduction.encode('utf-8'))
