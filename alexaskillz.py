@@ -14,7 +14,7 @@ SPOT_ID = '1449'
 
 @ask.launch
 def launched():
-    return question("The is the surf report for rest bay, porth call, South Wales.  Would you like today's surf report?")
+    return question("The is the surf report for rest bay, porth call, South Wales.  Would you like today's surf report?").reprompt("I didn't get that. Would you like the current conditions?")
 
 @ask.intent('YesOrNoFIrstIntent', mapping = { 'answer': 'yesorno' })
 def yes_or_no(answer):
