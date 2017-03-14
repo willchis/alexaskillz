@@ -27,7 +27,7 @@ def yes_or_no(answer):
 @ask.intent('SwellIntent', mapping = { 'report_time': 'timeofday'})
 def current_surf(report_time):
 
-    api_url = 'http://magicseaweed.com/api/%s/forecast/?spot_id=%s&fields=timestamp,swell.minBreakingHeight,swell.maxBreakingHeight' % (MAGIC_SEAWEED_KEY, SPOT_ID)
+    api_url = 'http://magicseaweed.com/api/%s/forecast/?spot_id=%s&fields=timestamp,swell.minBreakingHeight,swell.maxBreakingHeight,wind.speed, wind.compassDirection' % (MAGIC_SEAWEED_KEY, SPOT_ID)
     print 'Calling Magic Seaweed via API URL: ' + api_url
     json_reponse = read_from_url(api_url)
 
@@ -44,9 +44,10 @@ def current_surf(report_time):
 
     min_swell = closet_time['swell']['minBreakingHeight']
     max_swell = closet_time['swell']['maxBreakingHeight']
+    wind_speed = closest_time['wind']['speed']
 
     print 'Got swell heights: %d to %d ft.' % (min_swell, max_swell)
-    return statement('Currently the swell height is between %d and %d foot at rest bay.' % (min_swell, max_swell))
+    return statement('Currently the swell height is between %d and %d foot at rest bay. The wind speed is %d miles per hour' % (min_swell, max_swell, wind_speed))
 
 
 #@ask.intent('GiveRandomInfo')
