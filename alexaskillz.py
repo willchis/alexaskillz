@@ -51,11 +51,13 @@ def current_surf(report_time):
 
 @ask.intent('BuildStatusIntent', mapping = { 'plan': 'Plan'})
 def build_status(plan):
+    # Use Bamboo API here to get 
     return statement('The latest %s build is red, with 4 failing tests.' % plan)
 
 @ask.intent('CurrentAdvertIntent')
 def current_advert():
-    return statement('That was the new Budweiser summer cider, available summer 2017.  Visit the Alexa app for a free sample.').standard_card(title='Budweiser Summer Cider', text='Claim your free sample..',small_image_url='https://www.budweiser.co.uk/content/images/Budweiser-Logo500x162.png')
+    # Match advert based on DAR info and return related promo.
+    return statement('That was the new Budweiser summer cider, available summer 2017.  Visit the Alexa app for a free sample.').standard_card(title='Budweiser Summer Cider', text='Claim your free sample..',large_image_url='https://www.budweiser.co.uk/content/images/Budweiser-Logo500x162.png')
 
 #@ask.intent('GiveRandomInfo')
 def politics_fact():
