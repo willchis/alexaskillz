@@ -33,22 +33,26 @@ def current_surf(report_time):
 
     unix_now = time.time()
     time_difference = 0
-    closet_time = json_reponse[0]
+    closest_time = json_reponse[0]
 
     for item in json_reponse:
         item_time_difference = abs(item['timestamp'] - unix_now)
 
         if (item_time_difference <= time_difference):
             time_difference = item_time_difference
-            closet_time = item
+            closest_time = item
 
-    min_swell = closet_time['swell']['minBreakingHeight']
-    max_swell = closet_time['swell']['maxBreakingHeight']
+    min_swell = closest_time['swell']['minBreakingHeight']
+    max_swell = closest_time['swell']['maxBreakingHeight']
     wind_speed = closest_time['wind']['speed']
 
-    print 'Got swell heights: %d to %d ft.' % (min_swell, max_swell)
+    print 'Got swell heights: %d to %d ft and wind speed %d' % (min_swell, max_swell, wind_speed)
     return statement('Currently the swell height is between %d and %d foot at rest bay. The wind speed is %d miles per hour' % (min_swell, max_swell, wind_speed))
 
+@ask.intent('BuildStatusIntent', mapping = { 'plan': 'Plan'})
+def build_status(plan):
+
+    return statement('The latest %s build is red with 4 failing tests.' % plan)
 
 #@ask.intent('GiveRandomInfo')
 def politics_fact():
