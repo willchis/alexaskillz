@@ -47,7 +47,8 @@ def current_surf(report_time):
     wind_speed = closest_time['wind']['speed']
 
     print 'Got swell heights: %d to %d ft and wind speed %d' % (min_swell, max_swell, wind_speed)
-    return statement('Currently the swell height is between %d and %d foot at rest bay. The wind speed is %d miles per hour.' % (min_swell, max_swell, wind_speed))
+    return statement('Currently the swell height is between %d and %d foot at rest bay. The wind speed is %d miles per hour.' \
+        % (min_swell, max_swell, wind_speed))
 
 @ask.intent('BuildStatusIntent', mapping = { 'plan': 'Plan'})
 def build_status(plan):
@@ -57,7 +58,8 @@ def build_status(plan):
 @ask.intent('CurrentAdvertIntent')
 def current_advert():
     # Match advert based on DAR info and return related promo.
-    return statement('That was the new Budweiser summer cider, available summer 2017.  Visit the Alexa app for a free sample.').standard_card(title='Budweiser Summer Cider', text='Claim your free sample..',large_image_url='https://www.budweiser.co.uk/content/images/Budweiser-Logo500x162.png')
+    return statement('That was the new Budweiser summer cider, available summer 2017.  Visit the Alexa app for a free sample.') \
+    .standard_card(title='Budweiser Summer Cider', text='Claim your free sample..', large_image_url='https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Bud_and_Budvar.jpg/1200px-Bud_and_Budvar.jpg')
 
 #@ask.intent('GiveRandomInfo')
 def politics_fact():
