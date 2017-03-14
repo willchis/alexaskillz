@@ -14,7 +14,7 @@ SPOT_ID = '1449'
 
 @ask.launch
 def launched():
-    return question("The is the surf report for restbay, porth call, South Wales.  Would you like today's surf report?")
+    return question("The is the surf report for rest bay, porth call, South Wales.  Would you like today's surf report?")
 
 @ask.intent('YesOrNoFIrstIntent', mapping = { 'answer': 'yesorno' })
 def yes_or_no(answer):
@@ -47,12 +47,15 @@ def current_surf(report_time):
     wind_speed = closest_time['wind']['speed']
 
     print 'Got swell heights: %d to %d ft and wind speed %d' % (min_swell, max_swell, wind_speed)
-    return statement('Currently the swell height is between %d and %d foot at rest bay. The wind speed is %d miles per hour' % (min_swell, max_swell, wind_speed))
+    return statement('Currently the swell height is between %d and %d foot at rest bay. The wind speed is %d miles per hour.' % (min_swell, max_swell, wind_speed))
 
 @ask.intent('BuildStatusIntent', mapping = { 'plan': 'Plan'})
 def build_status(plan):
+    return statement('The latest %s build is red, with 4 failing tests.' % plan)
 
-    return statement('The latest %s build is red with 4 failing tests.' % plan)
+@ask.intent('CurrentAdvertIntent')
+def current_advert():
+    return statement('That was the new Budweiser summer cider, available summer 2017.  Visit the Alexa app for a free sample.').standard_card(title='Budweiser Summer Cider', text='Claim your free sample..',small_image_url='https://www.budweiser.co.uk/content/images/Budweiser-Logo500x162.png')
 
 #@ask.intent('GiveRandomInfo')
 def politics_fact():
