@@ -14,7 +14,7 @@ SPOT_ID = '1449'
 
 @ask.launch
 def launched():
-    return question("The is the surf report for Restbay, Porthcawl, South Wales.  Would you like today's surf report?")
+    return question("The is the surf report for restbay, porth call, South Wales.  Would you like today's surf report?")
 
 @ask.intent('YesOrNoFIrstIntent', mapping = { 'answer': 'yesorno' })
 def yes_or_no(answer):
@@ -44,7 +44,7 @@ def current_surf(report_time):
 
     min_swell = closet_time['swell']['minBreakingHeight']
     max_swell = closet_time['swell']['maxBreakingHeight']
-    
+
     print 'Got swell heights: %d to %d ft.' % (min_swell, max_swell)
     return statement('Currently the swell height is between %d and %d foot at rest bay.' % (min_swell, max_swell))
 
