@@ -24,7 +24,7 @@ def yes_or_no(answer):
     else:
         return
 
-@ask.intent('SwellIntent', mapping = { 'report_time': 'timeofday'})
+@ask.intent('SwellIntent', mapping = { 'report_time': 'timeofday' })
 def current_surf(report_time):
 
     api_url = 'http://magicseaweed.com/api/%s/forecast/?spot_id=%s&fields=timestamp,swell.minBreakingHeight,swell.maxBreakingHeight,wind.speed, wind.compassDirection' % (MAGIC_SEAWEED_KEY, SPOT_ID)
@@ -50,16 +50,21 @@ def current_surf(report_time):
     return statement('Currently the swell height is between %d and %d foot at rest bay. The wind speed is %d miles per hour.' \
         % (min_swell, max_swell, wind_speed))
 
-@ask.intent('BuildStatusIntent', mapping = { 'plan': 'Plan'})
+
+
+@ask.intent('BuildStatusIntent', mapping = { 'plan': 'Plan' })
 def build_status(plan):
-    # Use Bamboo API here to get 
+    # Use Bamboo API to get build status(es) or trigger build etc.
     return statement('The latest %s build is red, with 4 failing tests.' % plan)
+
 
 @ask.intent('CurrentAdvertIntent')
 def current_advert():
-    # Match advert based on DAR info and return related promo.
+    # E.g. match advert based on DAR info/IP and return related promo and alexa 'card'
     return statement('That was the new Budweiser summer cider, available summer 2017.  Visit the Alexa app for a free sample.') \
     .standard_card(title='Budweiser Summer Cider', text='Claim your free sample..', large_image_url='https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Bud_and_Budvar.jpg/1200px-Bud_and_Budvar.jpg')
+
+
 
 #@ask.intent('GiveRandomInfo')
 def politics_fact():
